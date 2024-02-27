@@ -57,7 +57,6 @@ export class StaffCreationComponent extends ShareComponent implements OnInit {
 
     ngOnInit(): void {
         this.initForm();
-        console.log(this.data.services);
         this.services = this.data.services;
     }
 
