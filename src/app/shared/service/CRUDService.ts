@@ -4,9 +4,7 @@ import { environment } from '../../environments/environment';
 export class CRUDService {
     baseUrl: string;
 
-    constructor(private _http: HttpClient) {
-        this._http = _http;
-    }
+    constructor(protected _http: HttpClient) {}
 
     create(data: any) {
         return this._http.post<any>(
@@ -22,34 +20,45 @@ export class CRUDService {
         );
     }
 
-    getAll(page: number = null, itemsPerPage: number = null,query: string = null) {
+    getAll(
+        page: number = null,
+        itemsPerPage: number = null,
+        query: string = null,
+    ) {
         let params = [
             page ? `page=${page}` : '',
             itemsPerPage ? `size=${itemsPerPage}` : '',
-            query 
-          ].filter(Boolean).join('&');
-          
-          
-          let url = `${environment.URL_API}/${this.baseUrl}${params ? '?' + params : ''}`;
-          
-          
-          return this._http.get<any>(url);
-          
+            query,
+        ]
+            .filter(Boolean)
+            .join('&');
+
+        let url = `${environment.URL_API}/${this.baseUrl}${
+            params ? '?' + params : ''
+        }`;
+
+        return this._http.get<any>(url);
     }
 
-
-    search(page: number = null, itemsPerPage: number = null,query: string = null,data= {}) {
+    search(
+        page: number = null,
+        itemsPerPage: number = null,
+        query: string = null,
+        data = {},
+    ) {
         let params = [
             page ? `page=${page}` : '',
             itemsPerPage ? `size=${itemsPerPage}` : '',
-            query 
-          ].filter(Boolean).join('&');
-          
-          
-          let url = `${environment.URL_API}/${this.baseUrl}/search${params ? '?' + params : ''}`;
-          
-          return this._http.post<any>(url,data);
-          
+            query,
+        ]
+            .filter(Boolean)
+            .join('&');
+
+        let url = `${environment.URL_API}/${this.baseUrl}/search${
+            params ? '?' + params : ''
+        }`;
+
+        return this._http.post<any>(url, data);
     }
 
     getOne(id: string) {

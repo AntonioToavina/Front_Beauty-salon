@@ -11,7 +11,6 @@
                         Dépenses diverses
                     </div>
 
-
                     <div
                         class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4"
                     >
@@ -25,53 +24,66 @@
                             <span class="ml-2 mr-1">Nouveau</span>
                         </button>
                     </div>
-
-
-
-
                 </div>
-                    <!-- *FILTRER PAR-->
-                    
-                <mat-accordion>
+                <!-- *FILTRER PAR-->
+
+                <mat-accordion class="mb-5">
                     <mat-expansion-panel hideToggle>
                         <mat-expansion-panel-header>
-                          <mat-panel-title>
-                            Recherche avancée
-                          </mat-panel-title>
-                          <mat-panel-description>
-                            <mat-icon>filter_list</mat-icon>
-                          </mat-panel-description>
+                            <mat-panel-title>
+                                Recherche avancée
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <mat-icon>filter_list</mat-icon>
+                            </mat-panel-description>
                         </mat-expansion-panel-header>
-                        
 
                         <form
-                        [formGroup]="form"
-                        class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto"
-
+                            [formGroup]="form"
+                            class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto"
                         >
                             <div class="grid sm:grid-cols-4 gap-6 w-full">
-
                                 <div class="sm:col-span-2">
-                                    <mat-form-field  class="fuse-mat-dense flex-auto w-full">
-                                        <mat-label>Entrer une intervalle de date</mat-label>
-                                        <mat-date-range-input [rangePicker]="picker">
-                                            <input matStartDate placeholder="Date début" [formControlName]="'min_date'">
-                                            <input matEndDate placeholder="Date fin" [formControlName]="'max_date'">
+                                    <mat-form-field
+                                        class="fuse-mat-dense flex-auto w-full"
+                                    >
+                                        <mat-label
+                                            >Entrer une intervalle de
+                                            date</mat-label
+                                        >
+                                        <mat-date-range-input
+                                            [rangePicker]="picker"
+                                        >
+                                            <input
+                                                matStartDate
+                                                placeholder="Date début"
+                                                [formControlName]="'min_date'"
+                                            />
+                                            <input
+                                                matEndDate
+                                                placeholder="Date fin"
+                                                [formControlName]="'max_date'"
+                                            />
                                         </mat-date-range-input>
-                                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-date-range-picker #picker></mat-date-range-picker>
-
-
+                                        <mat-hint
+                                            >MM/DD/YYYY – MM/DD/YYYY</mat-hint
+                                        >
+                                        <mat-datepicker-toggle
+                                            matIconSuffix
+                                            [for]="picker"
+                                        ></mat-datepicker-toggle>
+                                        <mat-date-range-picker
+                                            #picker
+                                        ></mat-date-range-picker>
                                     </mat-form-field>
                                 </div>
-
-                          
                             </div>
 
                             <div class="grid sm:grid-cols-4 gap-6 w-full">
                                 <div class="sm:col-span-2">
-                                    <mat-form-field class="fuse-mat-dense flex-auto w-full">
+                                    <mat-form-field
+                                        class="fuse-mat-dense flex-auto w-full"
+                                    >
                                         <mat-label>Catégories</mat-label>
                                         <mat-icon
                                             class="icon-size-5"
@@ -79,28 +91,56 @@
                                             matPrefix
                                         ></mat-icon>
                                         <mat-select
-                                            (selectionChange)="categoryFilterData = updateFilterList($event,categoryFilterData ,categories,'categories')"
+                                            (selectionChange)="
+                                                categoryFilterData =
+                                                    updateFilterList(
+                                                        $event,
+                                                        categoryFilterData,
+                                                        categories,
+                                                        'categories'
+                                                    )
+                                            "
                                         >
-                                            <ng-container *ngFor="let ctg of categories">
-                                                <mat-option value="{{ ctg._id }}">{{
-                                                    ctg.categoryName
-                                                }}</mat-option>
+                                            <ng-container
+                                                *ngFor="let ctg of categories"
+                                            >
+                                                <mat-option
+                                                    value="{{ ctg._id }}"
+                                                    >{{
+                                                        ctg.categoryName
+                                                    }}</mat-option
+                                                >
                                             </ng-container>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
                                 <div class="sm:col-span-2">
                                     <mat-form-field class="flex">
-                                        <mat-label>Catégorie(s) choisie(s)</mat-label>
+                                        <mat-label
+                                            >Catégorie(s) choisie(s)</mat-label
+                                        >
                                         <mat-chip-grid #ctgChipGrid>
-                                            <ng-container *ngFor="let ctg of categoryFilterData">
+                                            <ng-container
+                                                *ngFor="
+                                                    let ctg of categoryFilterData
+                                                "
+                                            >
                                                 <mat-chip-row>
                                                     {{ ctg.categoryName }}
                                                     <mat-icon
-                                                        (click)="categoryFilterData = removeFilterList(ctg._id,categoryFilterData,'categories')"
+                                                        (click)="
+                                                            categoryFilterData =
+                                                                removeFilterList(
+                                                                    ctg._id,
+                                                                    categoryFilterData,
+                                                                    'categories'
+                                                                )
+                                                        "
                                                         class="icon-size-5"
                                                         matChipRemove
-                                                        [svgIcon]="'heroicons_solid:minus-circle'"
+                                                        [svgIcon]="
+                                                            'heroicons_solid:minus-circle'
+                                                        "
                                                     ></mat-icon>
                                                 </mat-chip-row>
                                             </ng-container>
@@ -115,36 +155,68 @@
                             </div>
                             <div class="grid sm:grid-cols-4 gap-6 w-full">
                                 <div class="sm:col-span-2">
-                                    <mat-form-field class="fuse-mat-dense flex-auto w-full">
+                                    <mat-form-field
+                                        class="fuse-mat-dense flex-auto w-full"
+                                    >
                                         <mat-label>Fréquences</mat-label>
                                         <mat-icon
                                             class="icon-size-5"
-                                            [svgIcon]="'heroicons_outline:arrow-path-solid'"
+                                            [svgIcon]="
+                                                'heroicons_outline:arrow-path-solid'
+                                            "
                                             matPrefix
                                         ></mat-icon>
                                         <mat-select
-                                            (selectionChange)="frequencyFilterData = updateFilterList($event,frequencyFilterData ,frequencies,'frequencies')"
+                                            (selectionChange)="
+                                                frequencyFilterData =
+                                                    updateFilterList(
+                                                        $event,
+                                                        frequencyFilterData,
+                                                        frequencies,
+                                                        'frequencies'
+                                                    )
+                                            "
                                         >
-                                            <ng-container *ngFor="let item of frequencies">
-                                                <mat-option value="{{ item._id }}">{{
-                                                    item.frequency
-                                                }}</mat-option>
+                                            <ng-container
+                                                *ngFor="let item of frequencies"
+                                            >
+                                                <mat-option
+                                                    value="{{ item._id }}"
+                                                    >{{
+                                                        item.frequency
+                                                    }}</mat-option
+                                                >
                                             </ng-container>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
                                 <div class="sm:col-span-2">
                                     <mat-form-field class="flex">
-                                        <mat-label>Fréquence(s) choisie(s)</mat-label>
+                                        <mat-label
+                                            >Fréquence(s) choisie(s)</mat-label
+                                        >
                                         <mat-chip-grid #freqChipGrid>
-                                            <ng-container *ngFor="let item of frequencyFilterData">
+                                            <ng-container
+                                                *ngFor="
+                                                    let item of frequencyFilterData
+                                                "
+                                            >
                                                 <mat-chip-row>
                                                     {{ item.frequency }}
                                                     <mat-icon
-                                                        (click)="frequencyFilterData = removeFilterList(item._id,frequencyFilterData,'frequencies')"
+                                                        (click)="
+                                                            frequencyFilterData =
+                                                                removeFilterList(
+                                                                    item._id,
+                                                                    frequencyFilterData,
+                                                                    'frequencies'
+                                                                )
+                                                        "
                                                         class="icon-size-5"
                                                         matChipRemove
-                                                        [svgIcon]="'heroicons_solid:minus-circle'"
+                                                        [svgIcon]="
+                                                            'heroicons_solid:minus-circle'
+                                                        "
                                                     ></mat-icon>
                                                 </mat-chip-row>
                                             </ng-container>
@@ -159,61 +231,100 @@
                             </div>
 
                             <div class="grid sm:grid-cols-4 gap-6 w-full">
-
                                 <div class="sm:col-span-2">
                                     <mat-card
-                                    class="fuse-mat-rounded fuse-mat-dense w-full"
+                                        class="fuse-mat-rounded fuse-mat-dense w-full"
                                     >
                                         <mat-card-header>
-
                                             <mat-card-title>
-                                                <mat-label>Montant (Ar)</mat-label>
+                                                <mat-label
+                                                    >Montant (Ar)</mat-label
+                                                >
                                             </mat-card-title>
                                         </mat-card-header>
                                         <mat-card-content>
-                                            <mat-slider [displayWith]="displayPrice" [min]="expensesFilterOptions.amount.min" [max]="expensesFilterOptions.amount.max" discrete>
-                                                <input matInput [formControlName]="'min_amount'" matSliderStartThumb />
-                                                <input matInput [formControlName]="'max_amount'" matSliderEndThumb />
-                                            </mat-slider>  
-                                                      
+                                            <mat-slider
+                                                [displayWith]="displayPrice"
+                                                [min]="
+                                                    expensesFilterOptions.amount
+                                                        .min
+                                                "
+                                                [max]="
+                                                    expensesFilterOptions.amount
+                                                        .max
+                                                "
+                                                discrete
+                                            >
+                                                <input
+                                                    matInput
+                                                    [formControlName]="
+                                                        'min_amount'
+                                                    "
+                                                    matSliderStartThumb
+                                                />
+                                                <input
+                                                    matInput
+                                                    [formControlName]="
+                                                        'max_amount'
+                                                    "
+                                                    matSliderEndThumb
+                                                />
+                                            </mat-slider>
                                         </mat-card-content>
-        
-                                    
                                     </mat-card>
                                 </div>
 
                                 <div class="sm:col-span-2">
                                     <mat-card
-                                    class="fuse-mat-rounded fuse-mat-dense w-full"
+                                        class="fuse-mat-rounded fuse-mat-dense w-full"
                                     >
                                         <mat-card-header>
-
                                             <mat-card-title>
-                                                <mat-label>Valeur de la fréquence</mat-label>
+                                                <mat-label
+                                                    >Valeur de la
+                                                    fréquence</mat-label
+                                                >
                                             </mat-card-title>
                                         </mat-card-header>
                                         <mat-card-content>
-                                            <mat-slider [min]="expensesFilterOptions.frequencyValue.min" [max]="expensesFilterOptions.frequencyValue.max" discrete>
-                                                <input matInput [formControlName]="'min_freq'" matSliderStartThumb />
-                                                <input matInput [formControlName]="'max_freq'" matSliderEndThumb />
-                                            </mat-slider>  
-                                                      
+                                            <mat-slider
+                                                [min]="
+                                                    expensesFilterOptions
+                                                        .frequencyValue.min
+                                                "
+                                                [max]="
+                                                    expensesFilterOptions
+                                                        .frequencyValue.max
+                                                "
+                                                discrete
+                                            >
+                                                <input
+                                                    matInput
+                                                    [formControlName]="
+                                                        'min_freq'
+                                                    "
+                                                    matSliderStartThumb
+                                                />
+                                                <input
+                                                    matInput
+                                                    [formControlName]="
+                                                        'max_freq'
+                                                    "
+                                                    matSliderEndThumb
+                                                />
+                                            </mat-slider>
                                         </mat-card-content>
-        
-                                    
                                     </mat-card>
                                 </div>
                             </div>
-
                         </form>
-
                     </mat-expansion-panel>
                 </mat-accordion>
 
-                <div class="grid gap-6 w-full">                    
+                <div class="grid gap-6 w-full">
                     <mat-form-field
-                    class="fuse-mat-rounded fuse-mat-dense w-full"
-                    [subscriptSizing]="'dynamic'"
+                        class="fuse-mat-rounded fuse-mat-dense w-full"
+                        [subscriptSizing]="'dynamic'"
                     >
                         <mat-icon
                             matPrefix
@@ -224,10 +335,10 @@
                             matInput
                             [formControl]="searchForm"
                             [autocomplete]="'on'"
-                            [placeholder]="'Recherche'"                         />
+                            [placeholder]="'Recherche'"
+                        />
                     </mat-form-field>
                 </div>
-
 
                 <div class="flex flex-col flex-auto mt-2 overflow-x-auto">
                     <table
@@ -236,7 +347,6 @@
                         class="mat-elevation-z8"
                         matSort
                     >
-                       
                         <ng-container matColumnDef="name">
                             <th
                                 mat-header-cell
@@ -246,12 +356,15 @@
                             >
                                 Dépense
                             </th>
-                            <td mat-cell *matCellDef="let expense" [matTooltip]="expense.description">
+                            <td
+                                mat-cell
+                                *matCellDef="let expense"
+                                [matTooltip]="expense.description"
+                            >
                                 {{ expense.name }}
                             </td>
                         </ng-container>
 
-                       
                         <ng-container matColumnDef="amount">
                             <th
                                 mat-header-cell
@@ -262,8 +375,7 @@
                                 Montant
                             </th>
                             <td mat-cell *matCellDef="let expense">
-                                
-                                {{ expense.amount | mlgCurrency}}
+                                {{ expense.amount | mlgCurrency }}
                             </td>
                         </ng-container>
                         <ng-container matColumnDef="date">
@@ -276,8 +388,7 @@
                                 Date
                             </th>
                             <td mat-cell *matCellDef="let expense">
-                                
-                                {{ expense.date | date: 'EEE, dd MMM yyyy'}}
+                                {{ expense.date | date: "EEE, dd MMM yyyy" }}
                             </td>
                         </ng-container>
 
@@ -291,8 +402,12 @@
                                 Fréquence
                             </th>
                             <td mat-cell *matCellDef="let expense">
-                                
-                                {{ displayFrequency(expense.frequencyValue,expense.frequency.level)}}
+                                {{
+                                    displayFrequency(
+                                        expense.frequencyValue,
+                                        expense.frequency.level
+                                    )
+                                }}
                             </td>
                         </ng-container>
 
@@ -306,8 +421,7 @@
                                 Catégorie
                             </th>
                             <td mat-cell *matCellDef="let expense">
-                                
-                                {{ expense.expenseCategory.categoryName}}
+                                {{ expense.expenseCategory.categoryName }}
                             </td>
                         </ng-container>
                         <ng-container matColumnDef="edit">
@@ -316,7 +430,7 @@
                                 class="text-base uppercase"
                                 *matHeaderCellDef
                             ></th>
-                            <td mat-cell *matCellDef="let expense" >
+                            <td mat-cell *matCellDef="let expense">
                                 <button
                                     class="ml-4"
                                     mat-button
@@ -337,9 +451,9 @@
                                 class="text-base uppercase"
                                 *matHeaderCellDef
                             ></th>
-                            <td mat-cell *matCellDef="let expense" >
+                            <td mat-cell *matCellDef="let expense">
                                 <button
-                                matTooltip="supprimer"
+                                    matTooltip="supprimer"
                                     class="ml-4"
                                     mat-button
                                     (click)="deleteExpense(expense)"
@@ -361,8 +475,14 @@
                             *matRowDef="let row; columns: displayedColumns"
                         ></tr>
                     </table>
-                    <mat-paginator aria-label="éléments par page" [length]="totalItems" [pageSize]="itemsPerPage" [pageSizeOptions]="itemsPerPageOptions" showFirstLastButtons (page)="pageChanged($event)"></mat-paginator>
-
+                    <mat-paginator
+                        aria-label="éléments par page"
+                        [length]="totalItems"
+                        [pageSize]="itemsPerPage"
+                        [pageSizeOptions]="itemsPerPageOptions"
+                        showFirstLastButtons
+                        (page)="pageChanged($event)"
+                    ></mat-paginator>
                 </div>
             </div>
         </div>

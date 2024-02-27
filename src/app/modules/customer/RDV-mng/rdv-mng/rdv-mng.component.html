@@ -1,0 +1,128 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+    <mat-drawer-container class="flex-auto h-full">
+        <mat-drawer
+            class="w-80"
+            [autoFocus]="false"
+            [mode]="'side'"
+            [opened]="true"
+            #matDrawer
+        >
+            <div class="flex flex-col flex-auto h-full dark:bg-default">
+                <div class="flex flex-col flex-0">
+                    <div class="flex flex-0 items-center p-5 border-b">
+                        <div class="flex items-center mt-2">
+                            <div
+                                class="min-w-20 text-center text-3xl tracking-tighter leading-none"
+                            >
+                                Rendez-vous
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form [formGroup]="form">
+                    <div
+                        class="flex flex-col flex-auto shrink-0 pt-6 bg-gray-50 dark:bg-transparent"
+                    >
+                        <div class="flex flex-col px-6 pb-2">
+                            <div class="p-4 leading-none rounded-xl border">
+                                <div class="text-sm font-medium text-secondary">
+                                    Total
+                                </div>
+                                <div class="mt-2 font-mono text-xl">0 Ar</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col px-6 py-2">
+                            <mat-label>Date</mat-label>
+                            <bryntum-date-time-field
+                                (onChange)="addValue($event)"
+                            ></bryntum-date-time-field>
+                        </div>
+
+                        <div class="flex flex-col px-6 pb-2">
+                            <mat-form-field class="w-full">
+                                <mat-label>Services</mat-label>
+                                <mat-select
+                                    [formControlName]="'service'"
+                                    (selectionChange)="getStaffs($event)"
+                                >
+                                    <ng-container
+                                        *ngFor="let service of services"
+                                    >
+                                        <mat-option [value]="service._id">
+                                            {{ service.name }}
+                                        </mat-option>
+                                    </ng-container>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="flex flex-col px-6 pb-1">
+                            <mat-form-field class="w-full">
+                                <mat-label>Employés</mat-label>
+                                <mat-select [formControlName]="'staff'">
+                                    <ng-container
+                                        *ngFor="let staff of staffsService"
+                                    >
+                                        <mat-option [value]="staff._id">{{
+                                            staff.name + " " + staff.firstName
+                                        }}</mat-option>
+                                    </ng-container>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="flex flex-col px-6 pb-2">
+                            <mat-form-field class="w-full">
+                                <mat-label>Rappel</mat-label>
+                                <mat-select [formControlName]="'remainder'">
+                                    <ng-container
+                                        *ngFor="let remainder of remainders"
+                                    >
+                                        <mat-option [value]="remainder.value">{{
+                                            remainder.label
+                                        }}</mat-option>
+                                    </ng-container>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="flex flex-col px-6 pb-2">
+                            <button
+                                class="mt-4 mb-8 bg-primary"
+                                mat-flat-button
+                                [color]="'primary'"
+                                (click)="makeBooking()"
+                            >
+                                Valider
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </mat-drawer>
+
+        <mat-drawer-content class="flex flex-col">
+            <div
+                class="flex flex-col flex-auto min-h-full bg-card dark:bg-default"
+            >
+                <div
+                    class="relative flex flex-auto bg-gray-50 dark:bg-transparent"
+                >
+                    <bryntum-calendar-project-model
+                        #project
+                        [events]="events"
+                        [resources]="resources"
+                    ></bryntum-calendar-project-model>
+
+                    <bryntum-calendar
+                        #calendar
+                        [date]="calendarConfig.date!"
+                        [project]="project"
+                    ></bryntum-calendar>
+                </div>
+            </div>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>

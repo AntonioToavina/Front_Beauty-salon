@@ -2,7 +2,7 @@
     <div
         class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-green-600 text-on-primary"
     >
-        <div class="text-lg font-medium">{{pageTitle}}</div>
+        <div class="text-lg font-medium">{{ pageTitle }}</div>
         <button mat-icon-button [tabIndex]="-1" (click)="closeModal()">
             <mat-icon
                 class="text-current"
@@ -16,8 +16,6 @@
         class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto"
         (ngSubmit)="onSubmit()"
     >
-
-
         <div class="grid gap-6 w-full">
             <mat-form-field class="fuse-mat-dense flex-auto w-full">
                 <mat-label>Nom du service </mat-label>
@@ -34,66 +32,82 @@
             </mat-form-field>
         </div>
 
-
-    <div class="grid gap-6 w-full">
-        <mat-form-field class="fuse-mat-dense flex-auto w-full">
-            <mat-label>Déscription</mat-label>
-            <textarea
-                matInput
-                [formControlName]="'description'"
-                class="w-full"
-            ></textarea>
-        </mat-form-field>
-    </div>
-
-
-    <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
-        <div class="sm:col-span-2">
+        <div class="grid gap-6 w-full">
             <mat-form-field class="fuse-mat-dense flex-auto w-full">
-                <mat-label>Prix (Ar) </mat-label>
-                <mat-icon
-                    class="icon-size-5"
-                    [svgIcon]="'heroicons_outline:banknotes-solid'"
-                    matPrefix
-                ></mat-icon>
-                <input [formControlName]="'price'" min="0" type="number" matInput />
-
-                <mat-error *ngIf="form.get('price').hasError('required')">
-                    Prix invalide
-                </mat-error>
+                <mat-label>Déscription</mat-label>
+                <textarea
+                    matInput
+                    [formControlName]="'description'"
+                    class="w-full"
+                ></textarea>
             </mat-form-field>
         </div>
 
-        <div class="sm:col-span-2">
-            <mat-form-field class="fuse-mat-dense flex-auto w-full">
-                <mat-label>Durée (en min)</mat-label>
-                <mat-icon
-                    class="icon-size-5"
-                    [svgIcon]="'heroicons_outline:clock-solid'"
-                    matPrefix
-                ></mat-icon>
-                <input [formControlName]="'duration'" type="number" min="0" [max]="24*60" matInput />
-                
-                <mat-error *ngIf="form.get('duration').hasError('required')">
-                    La durée est obligatoire
-                </mat-error>
+        <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+            <div class="sm:col-span-2">
+                <mat-form-field class="fuse-mat-dense flex-auto w-full">
+                    <mat-label>Prix (Ar) </mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_outline:banknotes-solid'"
+                        matPrefix
+                    ></mat-icon>
+                    <input
+                        [formControlName]="'price'"
+                        min="0"
+                        type="number"
+                        matInput
+                    />
 
-                <mat-error *ngIf="form.get('duration').hasError('min') || form.get('duration').hasError('max')">
-                    La durée doit être valide et inférieur à une journée
-                </mat-error>
-            </mat-form-field>
+                    <mat-error *ngIf="form.get('price').hasError('required')">
+                        Prix invalide
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="sm:col-span-2">
+                <mat-form-field class="fuse-mat-dense flex-auto w-full">
+                    <mat-label>Durée (en min)</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_outline:clock-solid'"
+                        matPrefix
+                    ></mat-icon>
+                    <input
+                        [formControlName]="'duration'"
+                        type="number"
+                        min="0"
+                        [max]="24 * 60"
+                        matInput
+                    />
+
+                    <mat-error
+                        *ngIf="form.get('duration').hasError('required')"
+                    >
+                        La durée est obligatoire
+                    </mat-error>
+
+                    <mat-error
+                        *ngIf="
+                            form.get('duration').hasError('min') ||
+                            form.get('duration').hasError('max')
+                        "
+                    >
+                        La durée doit être valide et inférieur à une journée
+                    </mat-error>
+                </mat-form-field>
+            </div>
         </div>
-    </div>
 
-    <fuse-alert
-        class="mt-4"
-        *ngIf="showAlert"
-        [appearance]="'outline'"
-        [showIcon]="true"
-        [type]="alert.type"
-    >
-        {{ alert.message }}
-    </fuse-alert>
+        <fuse-alert
+            class="mt-4"
+            *ngIf="showAlert"
+            [appearance]="'outline'"
+            [showIcon]="true"
+            [type]="alert.type"
+        >
+            {{ alert.message }}
+        </fuse-alert>
 
         <!-- Actions -->
         <div class="flex items-center justify-end mt-4">
@@ -116,7 +130,5 @@
                 </mat-progress-spinner>
             </button>
         </div>
-
     </form>
-
 </div>

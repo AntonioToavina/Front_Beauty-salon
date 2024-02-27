@@ -63,13 +63,20 @@ export const appRoutes: Route[] = [
                         (m) => m.StaffModule,
                     ),
             },
+            {
+                path: 'customer',
+                loadChildren: () =>
+                    import('app/modules/customer/customer.module').then(
+                        (m) => m.CustomerModule,
+                    ),
+            },
         ],
     },
 
     {
         path: '**',
         loadChildren: () =>
-            import('app/modules/error-404/error-404.module').then(
+            import('app/modules/Common/error-404/error-404.module').then(
                 (module) => module.Error404Module,
             ),
         data: { title: 'Error', layout: 'compact' },

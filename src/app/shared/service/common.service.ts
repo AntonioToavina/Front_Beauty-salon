@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import { BehaviorSubject } from 'rxjs';
-import { User } from '../../models/User';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
 
@@ -37,7 +35,7 @@ export class CommonService {
         let userType = this.getValue_FromToken('userType');
         let urlRedirection = '/admin/dashboard';
         if (userType == 'Staff') urlRedirection = '/staff/home';
-        if (userType == 'Customer') urlRedirection = '/customer/home';
+        if (userType == 'Customer') urlRedirection = '/customer/rdvMng';
 
         this._router.navigate([urlRedirection]).then();
     }
