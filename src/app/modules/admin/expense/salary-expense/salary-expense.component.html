@@ -28,85 +28,59 @@
                 </div>
 
                 <!-- FORMULAIRE DE RECHERCHE -->
-                <!-- *FILTRER PAR-->
-
-                <mat-accordion class="mb-5">
+                    <!-- *FILTRER PAR-->
+                    
+                <mat-accordion>
                     <mat-expansion-panel hideToggle>
                         <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Recherche avancée
-                            </mat-panel-title>
-                            <mat-panel-description>
-                                <mat-icon>filter_list</mat-icon>
-                            </mat-panel-description>
+                          <mat-panel-title>
+                            Recherche avancée
+                          </mat-panel-title>
+                          <mat-panel-description>
+                            <mat-icon>filter_list</mat-icon>
+                          </mat-panel-description>
                         </mat-expansion-panel-header>
+                        
 
                         <form
-                            [formGroup]="form"
-                            class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto"
+                        [formGroup]="form"
+                        class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto"
+
                         >
+                           
+
                             <div class="grid sm:grid-cols-4 gap-6 w-full">
                                 <div class="sm:col-span-2">
-                                    <mat-form-field
-                                        class="fuse-mat-dense flex-auto w-full"
-                                    >
+                                    <mat-form-field class="fuse-mat-dense flex-auto w-full">
                                         <mat-label>Postes</mat-label>
                                         <mat-icon
                                             class="icon-size-5"
-                                            [svgIcon]="
-                                                'heroicons_outline:identification'
-                                            "
+                                            [svgIcon]="'heroicons_outline:identification'"
                                             matPrefix
                                         ></mat-icon>
                                         <mat-select
-                                            (selectionChange)="
-                                                postFilterData =
-                                                    updateFilterList(
-                                                        $event,
-                                                        postFilterData,
-                                                        posts,
-                                                        'posts'
-                                                    )
-                                            "
+                                            (selectionChange)="postFilterData = updateFilterList($event,postFilterData ,posts,'posts')"
                                         >
-                                            <ng-container
-                                                *ngFor="let post of posts"
-                                            >
-                                                <mat-option
-                                                    value="{{ post._id }}"
-                                                    >{{ post.name }}</mat-option
-                                                >
+                                            <ng-container *ngFor="let post of posts">
+                                                <mat-option value="{{ post._id }}">{{
+                                                    post.name
+                                                }}</mat-option>
                                             </ng-container>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
                                 <div class="sm:col-span-2">
                                     <mat-form-field class="flex">
-                                        <mat-label
-                                            >Poste(s) occupée(s)</mat-label
-                                        >
+                                        <mat-label>Poste(s) occupée(s)</mat-label>
                                         <mat-chip-grid #postChipGrid>
-                                            <ng-container
-                                                *ngFor="
-                                                    let post of postFilterData
-                                                "
-                                            >
+                                            <ng-container *ngFor="let post of postFilterData">
                                                 <mat-chip-row>
                                                     {{ post.name }}
                                                     <mat-icon
-                                                        (click)="
-                                                            postFilterData =
-                                                                removeFilterList(
-                                                                    post._id,
-                                                                    postFilterData,
-                                                                    'posts'
-                                                                )
-                                                        "
+                                                        (click)="postFilterData = removeFilterList(post._id,postFilterData,'posts')"
                                                         class="icon-size-5"
                                                         matChipRemove
-                                                        [svgIcon]="
-                                                            'heroicons_solid:minus-circle'
-                                                        "
+                                                        [svgIcon]="'heroicons_solid:minus-circle'"
                                                     ></mat-icon>
                                                 </mat-chip-row>
                                             </ng-container>
@@ -121,68 +95,36 @@
                             </div>
                             <div class="grid sm:grid-cols-4 gap-6 w-full">
                                 <div class="sm:col-span-2">
-                                    <mat-form-field
-                                        class="fuse-mat-dense flex-auto w-full"
-                                    >
+                                    <mat-form-field class="fuse-mat-dense flex-auto w-full">
                                         <mat-label>Fréquences</mat-label>
                                         <mat-icon
                                             class="icon-size-5"
-                                            [svgIcon]="
-                                                'heroicons_outline:arrow-path-solid'
-                                            "
+                                            [svgIcon]="'heroicons_outline:arrow-path-solid'"
                                             matPrefix
                                         ></mat-icon>
                                         <mat-select
-                                            (selectionChange)="
-                                                frequencyFilterData =
-                                                    updateFilterList(
-                                                        $event,
-                                                        frequencyFilterData,
-                                                        frequencies,
-                                                        'frequencies'
-                                                    )
-                                            "
+                                            (selectionChange)="frequencyFilterData = updateFilterList($event,frequencyFilterData ,frequencies,'frequencies')"
                                         >
-                                            <ng-container
-                                                *ngFor="let item of frequencies"
-                                            >
-                                                <mat-option
-                                                    value="{{ item._id }}"
-                                                    >{{
-                                                        item.frequency
-                                                    }}</mat-option
-                                                >
+                                            <ng-container *ngFor="let item of frequencies">
+                                                <mat-option value="{{ item._id }}">{{
+                                                    item.frequency
+                                                }}</mat-option>
                                             </ng-container>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
                                 <div class="sm:col-span-2">
                                     <mat-form-field class="flex">
-                                        <mat-label
-                                            >Fréquence(s) choisie(s)</mat-label
-                                        >
+                                        <mat-label>Fréquence(s) choisie(s)</mat-label>
                                         <mat-chip-grid #freqChipGrid>
-                                            <ng-container
-                                                *ngFor="
-                                                    let item of frequencyFilterData
-                                                "
-                                            >
+                                            <ng-container *ngFor="let item of frequencyFilterData">
                                                 <mat-chip-row>
                                                     {{ item.frequency }}
                                                     <mat-icon
-                                                        (click)="
-                                                            frequencyFilterData =
-                                                                removeFilterList(
-                                                                    item._id,
-                                                                    frequencyFilterData,
-                                                                    'frequencies'
-                                                                )
-                                                        "
+                                                        (click)="frequencyFilterData = removeFilterList(item._id,frequencyFilterData,'frequencies')"
                                                         class="icon-size-5"
                                                         matChipRemove
-                                                        [svgIcon]="
-                                                            'heroicons_solid:minus-circle'
-                                                        "
+                                                        [svgIcon]="'heroicons_solid:minus-circle'"
                                                     ></mat-icon>
                                                 </mat-chip-row>
                                             </ng-container>
@@ -197,100 +139,61 @@
                             </div>
 
                             <div class="grid sm:grid-cols-4 gap-6 w-full">
+
                                 <div class="sm:col-span-2">
                                     <mat-card
-                                        class="fuse-mat-rounded fuse-mat-dense w-full"
+                                    class="fuse-mat-rounded fuse-mat-dense w-full"
                                     >
                                         <mat-card-header>
+
                                             <mat-card-title>
-                                                <mat-label
-                                                    >Montant (Ar)</mat-label
-                                                >
+                                                <mat-label>Montant (Ar)</mat-label>
                                             </mat-card-title>
                                         </mat-card-header>
                                         <mat-card-content>
-                                            <mat-slider
-                                                [displayWith]="displayPrice"
-                                                [min]="
-                                                    staffFilterOptions.amount
-                                                        .min
-                                                "
-                                                [max]="
-                                                    staffFilterOptions.amount
-                                                        .max
-                                                "
-                                                discrete
-                                            >
-                                                <input
-                                                    matInput
-                                                    [formControlName]="
-                                                        'min_amount'
-                                                    "
-                                                    matSliderStartThumb
-                                                />
-                                                <input
-                                                    matInput
-                                                    [formControlName]="
-                                                        'max_amount'
-                                                    "
-                                                    matSliderEndThumb
-                                                />
-                                            </mat-slider>
+                                            <mat-slider [displayWith]="displayPrice" [min]="staffFilterOptions.amount.min" [max]="staffFilterOptions.amount.max" discrete>
+                                                <input matInput [formControlName]="'min_amount'" matSliderStartThumb />
+                                                <input matInput [formControlName]="'max_amount'" matSliderEndThumb />
+                                            </mat-slider>  
+                                                      
                                         </mat-card-content>
+        
+                                    
                                     </mat-card>
                                 </div>
 
                                 <div class="sm:col-span-2">
                                     <mat-card
-                                        class="fuse-mat-rounded fuse-mat-dense w-full"
+                                    class="fuse-mat-rounded fuse-mat-dense w-full"
                                     >
                                         <mat-card-header>
+
                                             <mat-card-title>
-                                                <mat-label
-                                                    >Valeur de la
-                                                    fréquence</mat-label
-                                                >
+                                                <mat-label>Valeur de la fréquence</mat-label>
                                             </mat-card-title>
                                         </mat-card-header>
                                         <mat-card-content>
-                                            <mat-slider
-                                                [min]="
-                                                    staffFilterOptions
-                                                        .frequencyValue.min
-                                                "
-                                                [max]="
-                                                    staffFilterOptions
-                                                        .frequencyValue.max
-                                                "
-                                                discrete
-                                            >
-                                                <input
-                                                    matInput
-                                                    [formControlName]="
-                                                        'min_freq'
-                                                    "
-                                                    matSliderStartThumb
-                                                />
-                                                <input
-                                                    matInput
-                                                    [formControlName]="
-                                                        'max_freq'
-                                                    "
-                                                    matSliderEndThumb
-                                                />
-                                            </mat-slider>
+                                            <mat-slider [min]="staffFilterOptions.frequencyValue.min" [max]="staffFilterOptions.frequencyValue.max" discrete>
+                                                <input matInput [formControlName]="'min_freq'" matSliderStartThumb />
+                                                <input matInput [formControlName]="'max_freq'" matSliderEndThumb />
+                                            </mat-slider>  
+                                                      
                                         </mat-card-content>
+        
+                                    
                                     </mat-card>
                                 </div>
                             </div>
+
                         </form>
+
                     </mat-expansion-panel>
                 </mat-accordion>
 
-                <div class="grid gap-6 w-full">
+                <div class="grid gap-6 w-full">                    
                     <mat-form-field
-                        class="fuse-mat-rounded fuse-mat-dense w-full"
-                        [subscriptSizing]="'dynamic'"
+                    class="fuse-mat-rounded fuse-mat-dense w-full"
+                    [subscriptSizing]="'dynamic'"
                     >
                         <mat-icon
                             matPrefix
@@ -301,10 +204,10 @@
                             matInput
                             [formControl]="searchForm"
                             [autocomplete]="'on'"
-                            [placeholder]="'Recherche'"
-                        />
+                            [placeholder]="'Recherche'"                         />
                     </mat-form-field>
                 </div>
+
 
                 <div class="flex flex-col flex-auto mt-2 overflow-x-auto">
                     <table
@@ -313,31 +216,18 @@
                         class="mat-elevation-z8"
                         matSort
                     >
+
                         <ng-container matColumnDef="select">
                             <th mat-header-cell *matHeaderCellDef>
-                                <mat-checkbox
-                                    (change)="$event ? masterToggle() : null"
-                                    [checked]="
-                                        staffSelected.hasValue() &&
-                                        isAllSelected()
-                                    "
-                                    [indeterminate]="
-                                        staffSelected.hasValue() &&
-                                        !isAllSelected()
-                                    "
-                                >
+                                <mat-checkbox (change)="$event ? masterToggle() : null"
+                                                [checked]="staffSelected.hasValue() && isAllSelected()"
+                                                [indeterminate]="staffSelected.hasValue() && !isAllSelected()">
                                 </mat-checkbox>
                             </th>
                             <td mat-cell *matCellDef="let row">
-                                <mat-checkbox
-                                    (click)="$event.stopPropagation()"
-                                    (change)="
-                                        $event
-                                            ? staffSelected.toggle(row)
-                                            : null
-                                    "
-                                    [checked]="staffSelected.isSelected(row)"
-                                >
+                                <mat-checkbox (click)="$event.stopPropagation()"
+                                                (change)="$event ? staffSelected.toggle(row) : null"
+                                                [checked]="staffSelected.isSelected(row)">
                                 </mat-checkbox>
                             </td>
                         </ng-container>
@@ -443,12 +333,7 @@
                                 Salaire
                             </th>
                             <td mat-cell *matCellDef="let user">
-                                {{
-                                    user.latestSalary
-                                        ? (user.latestSalary.amount
-                                          | mlgCurrency)
-                                        : ""
-                                }}
+                                {{ user.latestSalary ? (user.latestSalary.amount | mlgCurrency) : '' }}
                             </td>
                         </ng-container>
 
@@ -462,16 +347,11 @@
                                 Fréquence
                             </th>
                             <td mat-cell *matCellDef="let user">
-                                {{
-                                    user.latestSalary
-                                        ? displayFrequency(
-                                              user.latestSalary?.frequencyValue,
-                                              user.latestSalary?.frequency.level
-                                          )
-                                        : ""
-                                }}
+                                
+                                {{user.latestSalary? displayFrequency(user.latestSalary?.frequencyValue,user.latestSalary?.frequency.level) : ''}}
                             </td>
                         </ng-container>
+
 
                         <tr
                             mat-header-row
@@ -483,14 +363,8 @@
                             *matRowDef="let row; columns: displayedColumns"
                         ></tr>
                     </table>
-                    <mat-paginator
-                        aria-label="éléments par page"
-                        [length]="totalItems"
-                        [pageSize]="itemsPerPage"
-                        [pageSizeOptions]="itemsPerPageOptions"
-                        showFirstLastButtons
-                        (page)="pageChanged($event)"
-                    ></mat-paginator>
+                    <mat-paginator aria-label="éléments par page" [length]="totalItems" [pageSize]="itemsPerPage" [pageSizeOptions]="itemsPerPageOptions" showFirstLastButtons (page)="pageChanged($event)"></mat-paginator>
+
                 </div>
             </div>
         </div>

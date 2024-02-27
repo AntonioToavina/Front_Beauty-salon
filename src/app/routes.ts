@@ -76,19 +76,38 @@ function getAdminNavigations() {
                 },
             ],
         },
+        // lien pour les clients mais pas encore implementé
+        {
+            id: 'booking-mgmt',
+            title: 'Réservation',
+            type: 'aside',
+            icon: 'heroicons_outline:barbershop',
+            link: '',
+            children: [
+                {
+                    id: 'booking-mgmt.general',
+                    title: 'Réserver',
+                    type: 'basic',
+                    icon: 'heroicons_outline:booking-calendar',
+                    // /customer/booking/general
+                    link: '/admin/booking/general',
+                },
+
+                {
+                    id: 'booking-mgmt.history',
+                    title: 'Historique',
+                    type: 'basic',
+                    icon: 'heroicons_outline:document-search',
+                    // /customer/booking/history
+                    link: '/admin/booking/history',
+                },
+            ],
+        },
     ];
 }
 
 function getCustomerNavigations() {
-    return [
-        {
-            id: 'home',
-            title: 'Rendez-vous',
-            type: 'basic',
-            icon: 'heroicons_outline:document-text',
-            link: '/customer/rdvMng',
-        },
-    ];
+    return [];
 }
 
 function getStaffNavigations() {

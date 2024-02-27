@@ -27,6 +27,15 @@ const adminRoutes: Route[] = [
                 (m) => m.ExpenseModule,
             ),
     },
+
+// set this in customer 
+    {
+        path: 'booking',
+        loadChildren: () =>
+            import('app/modules/admin/booking/booking.module').then(
+                (m) => m.BookingModule,
+            ),
+    },
 ];
 
 @NgModule({
